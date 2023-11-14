@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flashcards app</title>
+  </head>
+  <body>
+    <header class="m-4">
+      <div class="container">
+        <div class="nav  md:flex flex-wrap justify-between items-center">
+          <h1>Flashcards</h1>
+          <div>
+            <button class="btn" onclick="showCreateCardBox()">New Cards</button>
+            <button class="btn" onclick="delFlashCards()">Del Cards</button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="cardcontainer m-4 flex justify-center">
+      <div id="create-box" class=" card w-96 text-white bg-primary ">
+        <div class="card-body">
+          <h2 class="card-title">Create Flashcards</h2>
+          <label for="question">Question</label>
+          <input placeholder="Enter question" id="question" class="input input-bordered" type="text">
+          <label  for="answer">Answer</label>
+          <input id="answer" class="input input-bordered" type="text">
+          <div>
+            <button  onclick="addFlashcard()" class="btn text-white">Save</button>
+            <button onclick="hideCreateBox()" class="btn text-white ">Close</button>
+          </div>
+          </div>
+        </div>
+      
+    </div>
+    <div id="flashcards" class="createdCardContainer break-words m-4 flex flex-wrap justify-center">
+     
+        </div>
+        
+    </div>
+    <script type="module" src="/main.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
