@@ -10,16 +10,16 @@
     <header class="m-4">
       <div class="container">
         <div class="nav  md:flex flex-wrap justify-between items-center">
-          <h1>Flashcards</h1>
+          <h1 style="color: #FFA33C;">Flashcards</h1>
           <div>
-            <button class="btn" onclick="showCreateCardBox()">New Cards</button>
-            <button class="btn" onclick="delFlashCards()">Del Cards</button>
+            <button style="background-color: #FFA33C;" class="btn text-primary" onclick="showCreateCardBox()">New Cards</button>
+            <button style="background-color: #FFA33C;" class="btn text-primary" onclick="delFlashCards()">Del Cards</button>
           </div>
         </div>
       </div>
     </header>
     <div class="cardcontainer m-4 flex justify-center">
-      <div id="create-box" class=" card w-96 text-white bg-primary ">
+      <div id="create-box" style="color:#FFA33C;;"  class=" card w-96 bg-primary ">
         <div class="card-body">
           <h2 class="card-title">Create Flashcards</h2>
           <label for="question">Question</label>
@@ -27,8 +27,8 @@
           <label  for="answer">Answer</label>
           <input id="answer" class="input input-bordered" type="text">
           <div>
-            <button  onclick="addFlashcard()" class="btn text-white">Save</button>
-            <button onclick="hideCreateBox()" class="btn text-white ">Close</button>
+            <button style="color: #FFA33C;;"  onclick="addFlashcard()" class="btn">Save</button>
+            <button style="color: #FFA33C;;" onclick="hideCreateBox()" class="btn ">Close</button>
           </div>
         </div>
       </div>
