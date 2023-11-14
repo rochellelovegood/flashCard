@@ -1,12 +1,5 @@
 export default {
-    base: '/',
-    build: {
-      rollupOptions: {
-        input: {
-          main: './index.html',
-          script: './script.js',
-        },
-      },
-    },
-  };
-  
+  build: {
+    outDir: 'dist', // or your desired output directory
+  },
+};
