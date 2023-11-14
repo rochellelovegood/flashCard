@@ -1,11 +1,12 @@
-export default{
-    base:'/',
-    build:{
-        rollupOptions:{
-            input:{
-                'main':'index.html',
-                'script':'script.js'
-            }
-        }
-    }
-}
+export default {
+    base: '/',
+    build: {
+      rollupOptions: {
+        input: {
+          main: './index.html',
+          script: './script.js',
+        },
+      },
+    },
+  };
+  
