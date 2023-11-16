@@ -2,104 +2,152 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flashcards app</title>
   </head>
   <body>
     <header class="m-4">
       <div class="container">
-        <div class="nav  md:flex flex-wrap justify-between items-center">
-          <h1 style="color: #FFA33C;">Flashcards</h1>
+        <div class="nav md:flex flex-wrap justify-between items-center">
+          <h1 style="color: #ffa33c">Flashcards</h1>
           <div>
-            <button style="background-color: #FFA33C;" class="btn text-primary" onclick="showCreateCardBox()">New Cards</button>
-            <button style="background-color: #FFA33C;" class="btn text-primary" onclick="delFlashCards()">Del Cards</button>
+            <button
+              style="background-color: #ffa33c"
+              class="btn text-primary"
+              onclick="showCreateCardBox()">
+              New Cards
+            </button>
+            <button
+              style="background-color: #ffa33c"
+              class="btn text-primary"
+              onclick="delFlashCards()">
+              Del Cards
+            </button>
           </div>
         </div>
       </div>
     </header>
     <div class="cardcontainer m-4 flex justify-center">
-      <div id="create-box" style="color:#FFA33C;;"  class=" card w-96 bg-primary ">
+      <div id="create-box" style="color: #ffa33c" class="card w-96 bg-primary">
         <div class="card-body">
           <h2 class="card-title">Create Flashcards</h2>
           <label for="question">Question</label>
-          <input placeholder="Enter question" id="question" class="input input-bordered" type="text">
-          <label  for="answer">Answer</label>
-          <input id="answer" class="input input-bordered" type="text">
+          <input
+            placeholder="Enter question"
+            id="question"
+            class="input input-bordered"
+            type="text" />
+          <label for="answer">Answer</label>
+          <input id="answer" class="input input-bordered" type="text" />
           <div>
-            <button style="color: #FFA33C;;"  onclick="addFlashcard()" class="btn">Save</button>
-            <button style="color: #FFA33C;;" onclick="hideCreateBox()" class="btn ">Close</button>
+            <button style="color: #ffa33c" onclick="addFlashcard()" class="btn">
+              Save
+            </button>
+            <button
+              style="color: #ffa33c"
+              onclick="hideCreateBox()"
+              class="btn">
+              Close
+            </button>
           </div>
         </div>
       </div>
     </div>
-    <div id="flashcards" class="createdCardContainer break-words m-4 flex flex-wrap justify-center"></div>
+    <div
+      id="flashcards"
+      class="createdCardContainer break-words m-4 flex flex-wrap justify-center"></div>
 
-    <script >
-      const flashcards= document.getElementById('flashcards')
-const createBox= document.getElementById('create-box')
-const question=document.getElementById('question')
-const answer=document.getElementById('answer')
-let contentArray= localStorage.getItem('items')? JSON.parse(localStorage.getItem('items')):[];
+    <script>
+      const flashcards = document.getElementById("flashcards");
+      const createBox = document.getElementById("create-box");
+      const question = document.getElementById("question");
+      const answer = document.getElementById("answer");
+      let contentArray = localStorage.getItem("items")
+        ? JSON.parse(localStorage.getItem("items"))
+        : [];
 
-function delFlashCards(){
-    localStorage.clear();
-    flashcards.innerHTML=" "
-    contentArray=[]
-}
-function showCreateCardBox(){
-    createBox.style.display="block"
-}
-contentArray.forEach(divMaker);
-function divMaker(text) {
-    var flashcards = document.getElementById("flashcards");
-  
-    var div = document.createElement("div");
-    div.className = "card m-2 w-96 h-52 text-white text-center text-xl bg-primary";
-    
-    var h1_question = document.createElement("h2");
-    h1_question.className = "card-title  text-xl font-bold p-11 justify-center";
-    h1_question.innerHTML = text.my_question;
-  
-    var h2_answer = document.createElement("div");
-    h2_answer.className = "hidden p-2 text-lg "; // Use the "hidden" class to hide initially
-    h2_answer.innerHTML = text.my_answer;
-  
-    div.appendChild(h1_question);
-    div.appendChild(h2_answer);
-  
-    div.addEventListener("click", function () {
-      // Toggle the "hidden" class to show/hide
-      h2_answer.classList.toggle("hidden");
-    });
-  
-    flashcards.appendChild(div);
-  }
-  
-  
-  function addFlashcard() {
-    const questionValue = question.value.trim();
-    const answerValue = answer.value.trim();
+      function delFlashCards() {
+        localStorage.clear();
+        flashcards.innerHTML = " ";
+        contentArray = [];
+      }
+      function deleteFlashcard(index) {
+        
+        contentArray.splice(index, 1);
 
-    if (questionValue && answerValue) {
-      const flashcardInfo = {
-        my_question: questionValue,
-        my_answer: answerValue,
-      };
+        
+        localStorage.setItem("items", JSON.stringify(contentArray));
+        redrawFlashcards();
+      }
+      function redrawFlashcards() {
+        
+        flashcards.innerHTML = "";
 
-      contentArray.push(flashcardInfo);
-      localStorage.setItem('items', JSON.stringify(contentArray));
-      divMaker(contentArray[contentArray.length - 1]);
+        contentArray.forEach(divMaker);
+      }
+      function showCreateCardBox() {
+        createBox.style.display = "block";
+      }
+      contentArray.forEach((item, index) => divMaker(item, index));
 
-      question.value = '';
-      answer.value = '';
-    } else {
-      alert('Please provide both a question and an answer.');
-    }
-  }
-function hideCreateBox(){
-  createBox.style.display="none"
-}
+      function divMaker(text,index) {
+        var flashcards = document.getElementById("flashcards");
+
+        var div = document.createElement("div");
+        div.className =
+          "card m-2  w-96  text-white text-center text-xl bg-primary";
+
+        var h1_question = document.createElement("h2");
+        h1_question.className =
+          "card-title  text-xl font-bold p-11 justify-center";
+        h1_question.innerHTML = text.my_question;
+
+        var h2_answer = document.createElement("div");
+        h2_answer.className = "hidden p-2 text-lg "; // Use the "hidden" class to hide initially
+        h2_answer.innerHTML = text.my_answer;
+        var button = document.createElement("button");
+        button.className = "btn m-auto mb-2 w-20 text-lg text-yellow-500";
+        button.innerHTML = "delete";
+        div.appendChild(h1_question);
+        div.appendChild(h2_answer);
+        div.appendChild(button);
+
+        div.addEventListener("click", function () {
+          // Toggle the "hidden" class to show/hide
+          h2_answer.classList.toggle("hidden");
+        });
+
+        button.addEventListener("click", function (e) {
+          e.stopPropagation(); // Prevent the click event from reaching the div
+          deleteFlashcard(index);
+        });
+        flashcards.appendChild(div);
+      }
+
+      function addFlashcard() {
+        const questionValue = question.value.trim();
+        const answerValue = answer.value.trim();
+
+        if (questionValue && answerValue) {
+          const flashcardInfo = {
+            my_question: questionValue,
+            my_answer: answerValue,
+          };
+
+          contentArray.push(flashcardInfo);
+          localStorage.setItem("items", JSON.stringify(contentArray));
+          divMaker(contentArray[contentArray.length - 1]);
+
+          question.value = "";
+          answer.value = "";
+        } else {
+          alert("Please provide both a question and an answer.");
+        }
+      }
+      function hideCreateBox() {
+        createBox.style.display = "none";
+      }
     </script>
     <script type="module" src="/main.js"></script>
   </body>
